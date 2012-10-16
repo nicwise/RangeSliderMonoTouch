@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RangeSlider.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AppDelegate.cs">
     <Files>
-      <File FileName="AppDelegate.cs" Line="39" Column="57" />
+      <File FileName="AppDelegate.cs" Line="25" Column="31" />
       <File FileName="RangeSlider.cs" Line="106" Column="3" />
-      <File FileName="README.md" Line="8" Column="39" />
+      <File FileName="README.md" Line="14" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

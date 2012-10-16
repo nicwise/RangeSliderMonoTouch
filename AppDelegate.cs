@@ -47,7 +47,7 @@ namespace RangesliderMT
 			rs.ThumbChanged = delegate {
 				Console.WriteLine ("Range: {0} -> {1}", rs.SelectedMinValue, rs.SelectedMaxValue);
 			};
-			rs.BackgroundColor = UIColor.Red;
+
 
 			viewController.View.AddSubview(rs);
 
