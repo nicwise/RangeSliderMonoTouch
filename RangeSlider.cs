@@ -24,22 +24,22 @@ namespace RangesliderMT
 		public RangeSlider (RectangleF frame) : base(frame)
 		{
 			trackBackground = new UIImageView(UIImage.FromFile("bar-background.png"));
-			trackBackground.Center = this.Center;
+			trackBackground.Center = Center;
 			AddSubview(trackBackground);
 
 			track = new UIImageView(UIImage.FromFile("bar-highlight.png"));
-			track.Center = this.Center;
+			track.Center = Center;
 			AddSubview (track);
 
 			minThumb = new UIImageView(UIImage.FromFile("handle.png"),
 			                           UIImage.FromFile ("handle-hover.png"));
-			minThumb.Frame = new RectangleF(0,0,minThumb.Image.Size.Width, minThumb.Image.Size.Height);
+			minThumb.Frame = new RectangleF(0,0,Frame.Size.Height, Frame.Size.Height);
 			minThumb.ContentMode = UIViewContentMode.Center;
 			AddSubview (minThumb);
 
 			maxThumb = new UIImageView(UIImage.FromFile("handle.png"),
 			                           UIImage.FromFile ("handle-hover.png"));
-			maxThumb.Frame = new RectangleF(0,0,maxThumb.Image.Size.Width, maxThumb.Image.Size.Height);
+			maxThumb.Frame = new RectangleF(0,0,Frame.Size.Height, Frame.Size.Height);
 			maxThumb.ContentMode = UIViewContentMode.Center;
 			AddSubview (maxThumb);
 
@@ -49,9 +49,9 @@ namespace RangesliderMT
 
 		public override void LayoutSubviews ()
 		{
-			//base.LayoutSubviews ();
-			minThumb.Center = new PointF(XForValue(SelectedMinValue), Center.Y);
-			maxThumb.Center = new PointF(XForValue(SelectedMaxValue), Center.Y);
+			base.LayoutSubviews ();
+			minThumb.Center = new PointF(XForValue(SelectedMinValue), Center.Y - Frame.Top);
+			maxThumb.Center = new PointF(XForValue(SelectedMaxValue), Center.Y - Frame.Top);
 
 			UpdateTrackHighlight();
 		}
@@ -76,7 +76,7 @@ namespace RangesliderMT
 			if (minThumbOn) 
 			{
 				minThumb.Center = new PointF(Math.Max (
-					XForValue(MinValue), Math.Min(touchPoint.X - distanceFromCenter, XForValue(SelectedMaxValue - MinRange))), minThumb.Center.Y);
+					XForValue(MinValue), Math.Min(touchPoint.X - distanceFromCenter, XForValue(SelectedMaxValue - MinRange))), minThumb.Center.Y - Frame.Top);
 				SelectedMinValue = ValueForX (minThumb.Center.X);
 			}
 
@@ -89,7 +89,7 @@ namespace RangesliderMT
 						touchPoint.X - distanceFromCenter, 
 						XForValue(SelectedMinValue + MinRange)
 					  )
-					), maxThumb.Center.Y);
+					), maxThumb.Center.Y - Frame.Top);
 
 
 				SelectedMaxValue = ValueForX (maxThumb.Center.X);
@@ -131,11 +131,14 @@ namespace RangesliderMT
 		private void UpdateTrackHighlight ()
 		{
 			track.Frame = new RectangleF(minThumb.Center.X, 
-			                             track.Center.Y - (track.Frame.Size.Height / 2),
+			                             maxThumb.Center.Y - (track.Frame.Height /2),
 			                             maxThumb.Center.X - minThumb.Center.X,
 			                             track.Frame.Size.Height);
-			trackBackground.Frame = new RectangleF(0 + (minThumb.Frame.Size.Width / 2), track.Center.Y - (track.Frame.Size.Height / 2),
+			trackBackground.Frame = new RectangleF(0 + (minThumb.Frame.Size.Width / 2), 
+			                                       maxThumb.Center.Y- (trackBackground.Frame.Height /2),
 			                                       Frame.Width - (minThumb.Frame.Size.Width), trackBackground.Frame.Size.Height);
+
+
 		}
 
 	}

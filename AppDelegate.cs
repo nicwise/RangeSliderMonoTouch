@@ -36,7 +36,7 @@ namespace RangesliderMT
 
 
 
-			RangeSlider rs = new RangeSlider(new RectangleF(10,20,300,30));
+			RangeSlider rs = new RangeSlider(new RectangleF(10,220,300,30));
 			rs.MinValue = 1;
 			rs.SelectedMinValue = 1;
 
